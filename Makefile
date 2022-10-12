@@ -6,17 +6,19 @@
 #    By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/08 22:54:17 by ilya              #+#    #+#              #
-#    Updated: 2022/10/08 23:31:12 by ilya             ###   ########.fr        #
+#    Updated: 2022/10/12 13:41:32 by ilya             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	ft_containers
 
-SRC			=	main.cpp \
+SRC			=	try.cpp \
+				main.cpp
+
 
 INC			= 
 
-OBJDIR		=	obj
+OBJDIR		=	tmp
 SRCDIR		=	src
 INCDIR		=	inc
 
@@ -26,7 +28,7 @@ OBJ_PATH 	=	$(addprefix $(OBJDIR)/, $(notdir $(SRC_PATH:.cpp=.o)))
 
 CC			=	clang++
 FLAGS		=	-Wall -Wextra -Werror
-O_FLAG		=	-O3
+O_FLAG		=	-O3 -std=c++98 #-MD
 
 all				: $(NAME)
 
@@ -51,3 +53,4 @@ test			:	$(NAME)
 		leaks --atExit -- ./ft_containers
 
 .PHONY			: all clean fclean re
+
