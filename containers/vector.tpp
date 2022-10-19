@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/19 12:47:39 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/19 12:54:46 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ namespace ft
 		if (_array != 0)
 			_alloc.deallocate(_array, _capacity);
 	}
+
 
 	/*	Member functions */
 

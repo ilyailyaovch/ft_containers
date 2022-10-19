@@ -8,4 +8,4 @@ Reimplement some containers of the STL
 - stack
 - queue
 - && their iterators (const_iterators, reverse_iterators)  
-**[C++98]**
+- standart [C++98]
