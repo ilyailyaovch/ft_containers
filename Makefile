@@ -6,29 +6,29 @@
 #    By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/08 22:54:17 by ilya              #+#    #+#              #
-#    Updated: 2022/10/12 13:41:32 by ilya             ###   ########.fr        #
+#    Updated: 2022/10/19 12:01:00 by ilya             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	ft_containers
 
-SRC			=	try.cpp \
-				main.cpp
-
+SRC			=	main.cpp \
+				newMain.cpp
 
 INC			= 
 
 OBJDIR		=	tmp
 SRCDIR		=	src
-INCDIR		=	inc
+INCDIR		=	containers
 
 INC_PATH	= 	$(addprefix $(INCDIR)/, $(INC))
 SRC_PATH 	=	$(addprefix $(SRCDIR)/, $(SRC))
 OBJ_PATH 	=	$(addprefix $(OBJDIR)/, $(notdir $(SRC_PATH:.cpp=.o)))
+DEP_PATH 	=	$(addprefix $(OBJDIR)/, $(notdir $(SRC_PATH:.cpp=.d)))
 
 CC			=	clang++
 FLAGS		=	-Wall -Wextra -Werror
-O_FLAG		=	-O3 -std=c++98 #-MD
+O_FLAG		=	-O3 -std=c++98 -MD
 
 all				: $(NAME)
 
@@ -54,3 +54,4 @@ test			:	$(NAME)
 
 .PHONY			: all clean fclean re
 
+-include $(DEP_PATH)
