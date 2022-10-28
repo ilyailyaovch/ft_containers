@@ -14,13 +14,13 @@ namespace ft
 	random_access_iterator<T>::random_access_iterator(pointer ptr):
 		_elem(ptr){}
 
-	template <typename T>
+	template <typename T>	//!!!!!!!!
 	random_access_iterator<T>::random_access_iterator(const random_access_iterator &other):
-		_elem(other._elem){} //!!!
+		_elem(other._elem){} 
 	
-	template <typename T>
+	template <typename T>	//!!!!!!!!
 	random_access_iterator<T>&
-	random_access_iterator<T>::operator=(const random_access_iterator &other) //!!!
+	random_access_iterator<T>::operator=(const random_access_iterator &other)
 	{
 		if (this != &other)
 			this->_elem = other._elem;
@@ -83,8 +83,9 @@ namespace ft
 		return (temp);
 	}
 
-	template <typename T>		//a + n
-	random_access_iterator<T>	//return type
+	//	a + n
+	template <typename T>
+	random_access_iterator<T>
 	random_access_iterator<T>::operator+(difference_type num) const
 	{
 		random_access_iterator<T>	temp(*this);
@@ -92,8 +93,9 @@ namespace ft
 		return (temp);
 	}
 
-	template <typename T>		//a - n
-	random_access_iterator<T>	//return type
+	//	a - n
+	template <typename T>		
+	random_access_iterator<T>
 	random_access_iterator<T>::operator-(difference_type num) const
 	{
 		random_access_iterator<T>	temp(*this);
@@ -101,15 +103,16 @@ namespace ft
 		return (temp);
 	}
 
-	template <typename T>		//a - b
-	typename random_access_iterator<T>::difference_type	//return type
+	//a - b
+	template <typename T>
+	typename random_access_iterator<T>::difference_type
 	random_access_iterator<T>::operator-(const random_access_iterator<T> &other) const
 	{
 		return (_elem - other._elem);
 	}
 
 	template <typename T>
-	random_access_iterator<T>&	//return type
+	random_access_iterator<T>&
 	random_access_iterator<T>::operator+=(difference_type num)
 	{
 		this->_elem += num;
@@ -117,7 +120,7 @@ namespace ft
 	}
 
 	template <typename T>
-	random_access_iterator<T>&	//return type
+	random_access_iterator<T>&
 	random_access_iterator<T>::operator-=(difference_type num)
 	{
 		this->_elem -= num;
@@ -158,7 +161,7 @@ namespace ft
 	/* For Non-member functions  */
 
 	template <typename T_L, typename T_R>
-	typename random_access_iterator<T_L>::difference_type	//return type
+	typename random_access_iterator<T_L>::difference_type
 	operator-(const random_access_iterator<T_L> &lhs, const random_access_iterator<T_R> &rhs)
 	{
 		return (lhs.base() - rhs.base());
@@ -207,7 +210,7 @@ namespace ft
 	}
 
 	template <typename T>
-	random_access_iterator<T>	//return type
+	random_access_iterator<T>
 	operator+(	typename random_access_iterator<T>::difference_type n,
 				random_access_iterator<T> &rhs)
 	{
