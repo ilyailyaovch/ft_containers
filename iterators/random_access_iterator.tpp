@@ -48,7 +48,7 @@ namespace ft
 	}
 
 	// prefix	(++a)
-	template <typename T>	
+	template <typename T>
 	random_access_iterator<T>	&random_access_iterator<T>::operator++()
 	{
 		this->_elem += 1;
@@ -56,7 +56,7 @@ namespace ft
 	}
 
 	// prefix	(--a)
-	template <typename T>	
+	template <typename T>
 	random_access_iterator<T>	&random_access_iterator<T>::operator--()
 	{
 		this->_elem -= 1;
@@ -64,7 +64,7 @@ namespace ft
 	}
 
 	// postfix	(a++)
-	template <typename T>	
+	template <typename T>
 	random_access_iterator<T>	random_access_iterator<T>::operator++(int)
 	{
 		random_access_iterator<T>	temp;
@@ -74,7 +74,7 @@ namespace ft
 	}
 
 	// postfix	(a--)
-	template <typename T>	
+	template <typename T>
 	random_access_iterator<T>	random_access_iterator<T>::operator--(int)
 	{
 		random_access_iterator<T>	temp;

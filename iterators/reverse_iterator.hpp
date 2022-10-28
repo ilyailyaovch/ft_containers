@@ -6,8 +6,8 @@
 namespace	ft
 {
 	template <typename It>
-	class	reverse_iterator : ft::iterator<typename ft::iterator_traits<It>::iterator_category,
-											typename ft::iterator_traits<It>::value_type>
+	class	reverse_iterator : public	ft::iterator<	typename ft::iterator_traits<It>::iterator_category,
+														typename ft::iterator_traits<It>::value_type>
 	{
 		public:
 			/*	Member types defines */
