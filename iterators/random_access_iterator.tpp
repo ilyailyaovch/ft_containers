@@ -14,11 +14,11 @@ namespace ft
 	random_access_iterator<T>::random_access_iterator(pointer ptr):
 		_elem(ptr){}
 
-	template <typename T>	//!!!!!!!!
+	template <typename T>
 	random_access_iterator<T>::random_access_iterator(const random_access_iterator &other):
 		_elem(other._elem){} 
 	
-	template <typename T>	//!!!!!!!!
+	template <typename T>
 	random_access_iterator<T>&
 	random_access_iterator<T>::operator=(const random_access_iterator &other)
 	{

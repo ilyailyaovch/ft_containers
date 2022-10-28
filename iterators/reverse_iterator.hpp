@@ -11,7 +11,7 @@ namespace	ft
 	{
 		public:
 			/*	Member types defines */
-			typedef It													iterator_type;	//!!!!!!!!
+			typedef It													iterator_type;
 			typedef typename iterator_type::iterator_category			iterator_category;
 			typedef typename iterator_type::value_type					value_type;
 			typedef typename iterator_type::difference_type				difference_type;

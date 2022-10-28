@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 17:17:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/28 17:33:48 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/28 17:53:12 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,34 @@ int example1(void)
 	// }
 
 	// std::cout  << "operaror[]: "  << std::endl;
-	
 	// for (int i = 0; i < 3; i++)
 	// {
 	// 	std::cout << third[i] << std::endl;
 	// }
 	
-	std::cout  << "randon_access_operator: "  << std::endl;
-	ft::vector<int>::iterator	ft_it;
-	for (ft_it = third.begin(); ft_it != third.end(); ft_it ++)
-	{
-		std::cout << *ft_it << std::endl;
-	}
+	// std::cout  << "randon_access_operator: "  << std::endl;
+	// ft::vector<int>::iterator	ft_it;
+	// for (ft_it = third.begin(); ft_it != third.end(); ft_it ++)
+	// {
+	// 	std::cout << *ft_it << std::endl;
+	// }
 
 	std::cout  << "reverse_iterator: "  << std::endl;
 	ft::vector<int>::reverse_iterator	r_ft_it;
-	for (r_ft_it = third.rbegin(); r_ft_it != third.rend(); r_ft_it ++)
+	for (r_ft_it = third.rbegin(); r_ft_it != third.rend(); r_ft_it++)
 	{
 		std::cout << *r_ft_it << std::endl;
 	}
+
+	// r_ft_it = third.rbegin();
+	// r_ft_it++;
+	// ft::vector<int>::reverse_iterator r_ft_it_2(r_ft_it);
+	// std::cout << *r_ft_it_2 << std::endl;
+
+	// r_ft_it = third.rbegin();
+	// r_ft_it++;
+	// ft::vector<int>::reverse_iterator r_ft_it_2 = r_ft_it;
+	// std::cout << *r_ft_it_2 << std::endl;
 	
 	return (EXIT_SUCCESS);
 }
