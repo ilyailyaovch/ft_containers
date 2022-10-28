@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/19 12:49:41 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/28 16:54:18 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define VECTOR_HPP
 
 # include <memory> 				/*	std::allocator */
-# include <algorithm> 			/*	std::swap */
+# include <stdexcept>			/* 	try...catch */
 # include <iostream>			/*	std::cout */
+# include "../iterators/random_access_iterator.hpp"   
+# include "../iterators/reverse_iterator.hpp"
+# include "../utils/algorithm.hpp"
 
 namespace	ft
 {
@@ -36,10 +39,10 @@ namespace	ft
 			typedef	typename allocator_type::const_pointer		const_pointer;
 			
 			/*	Member types iterators */
-			// typedef random_access_it<T>						iterator;
-			// typedef random_access_it<const T>				const_iterator;
-			// typedef v_reverse_iter<iterator>				reverse_iterator;
-			// typedef v_reverse_iter<const_iterator>			const_reverse_iterator;
+			typedef random_access_iterator<const T>		const_iterator;
+			typedef random_access_iterator<T>			iterator;
+			typedef reverse_iterator<const_iterator>	const_reverse_iterator;
+			typedef	reverse_iterator<iterator>			reverse_iterator;
 
 		public:
 			/*	Canonical form */
@@ -47,22 +50,62 @@ namespace	ft
 			explicit	vector(	size_type size,										//fill
 								const_reference val = value_type(),
 								const	allocator_type &alloc = allocator_type());
-			// iterator later
-			// vector(const vector &other);
-			// vector	&operator=(const vector &rhs);
+			// iterator later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+			vector(const vector &copy);
+			//vector&	operator=(const vector &rhs); ///NOT YET
 			~vector(void);
 
 		public:
-			/*	Member functions */
-			void	clear();
+			/*	Member functions Iterators */
+			iterator					begin();
+			const_iterator				begin() const;
+			iterator					end();
+			const_iterator				end() const;
+			reverse_iterator			rbegin();
+			const_reverse_iterator		rbegin() const;
+			reverse_iterator			rend();
+			const_reverse_iterator		rend() const;
+
+		public:
+			/* Member functions Element access */
+			reference					operator[](size_type n);
+			const_reference				operator[](size_type n) const;
+
+		public:
+			/*	Member functions Modifiers */
+			void				swap(vector &other);
+			void				clear();
 
 		private:
-			size_type					_size;
-			size_type					_capacity;
-			pointer						_array;
-			allocator_type				_alloc;
+			size_type			_size;
+			size_type			_capacity;
+			pointer				_array;
+			allocator_type		_alloc;
 			
 	};	//end of "class vector"
+
+	/*	Non-member functions */
+
+	template <typename T, typename Allocator>
+	void	swap(vector<T, Allocator> &lhs, vector<T, Allocator> &rhs);
+	
+	template <typename T, typename Allocator>
+	bool	operator==(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs);
+	
+	template <typename T, typename Allocator>
+	bool	operator!=(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs);
+
+	template <typename T, typename Allocator>
+	bool	operator<(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs);
+
+	template <typename T, typename Allocator>
+	bool	operator<=(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs);
+
+	template <typename T, typename Allocator>
+	bool	operator>(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs);
+
+	template <typename T, typename Allocator>
+	bool	operator>=(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs);
 	
 }		//end of "namespace	ft"
 
