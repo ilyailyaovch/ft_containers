@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/28 16:54:18 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/30 11:20:19 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ namespace	ft
 			~vector(void);
 
 		public:
-			/*	Member functions Iterators */
+			/*	Member functions (Iterators) */
 			iterator					begin();
 			const_iterator				begin() const;
 			iterator					end();
@@ -67,14 +67,33 @@ namespace	ft
 			const_reverse_iterator		rend() const;
 
 		public:
-			/* Member functions Element access */
-			reference					operator[](size_type n);
-			const_reference				operator[](size_type n) const;
+			/* Member functions (Capacity) */
+			bool 						empty() const;
+			size_type 					size() const;
+			size_type 					max_size() const;
+			size_type					capacity() const;
+			void 						reserve(size_type new_cap);
+			void						resize(size_type n, value_type val = value_type());
 
 		public:
-			/*	Member functions Modifiers */
-			void				swap(vector &other);
-			void				clear();
+			/* Member functions (Element access) */
+			reference					operator[](size_type n);
+			const_reference				operator[](size_type n) const;
+			reference					at(size_type pos);
+			const_reference				at(size_type pos) const;
+			reference					front();
+			const_reference				front() const;
+			reference					back();
+			const_reference				back() const;
+			pointer						data();
+			const_pointer				data() const;
+
+		public:
+			/*	Member functions (Modifiers) */
+			void						swap(vector &other);
+			void						clear();
+			// iterator					erase(iterator pos);
+			// iterator					erase(iterator first, iterator last);
 
 		private:
 			size_type			_size;

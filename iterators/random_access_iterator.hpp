@@ -7,8 +7,8 @@ namespace	ft
 {
 	template <typename T>
 	// class random_access_iterator : public ft::iterator <ft::random_access_iterator_tag, T>
-	class	random_access_iterator : public ft::iterator<	typename ft::iterator_traits<T *>::iterator_category,
-															typename ft::iterator_traits<T *>::value_type>
+	class random_access_iterator : public ft::iterator<	typename ft::iterator_traits<T *>::iterator_category,
+														typename ft::iterator_traits<T *>::value_type>
 	{
 		public:
 			/*	Member types defines */

@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/28 17:30:52 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/30 10:56:15 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,79 @@ namespace ft
 	}
 	
 	/*=================================*/
+	/* Member functions Capacity */
+
+	template <typename T, typename Allocator>
+	bool	vector<T, Allocator>::empty() const
+	{
+		return (this->_size == 0);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::size_type
+	vector<T, Allocator>::size() const
+	{
+		return (this->_size);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::size_type
+	vector<T, Allocator>::max_size() const
+	{
+		return (this->_alloc.max_size());
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::size_type
+	vector<T, Allocator>::capacity() const
+	{
+		return (this->_capacity);
+	}
+
+	template <typename T, typename Allocator>
+	void	vector<T, Allocator>::reserve(size_type new_cap)
+	{
+		pointer		tmp;
+		size_type 	i;
+
+		if (this->_size ==  this->max_size())
+			throw std::length_error("vector::out of max_size");
+		else if (new_cap > this->_capacity)
+		{
+			tmp = _alloc.allocate(new_cap);
+			try
+			{
+				for (i = 0; i < this->_size; ++i)
+				{
+					_alloc.construct(tmp + i, this->_array[i]);
+					_alloc.destroy(_alloc.address(this->_array[i]));
+				}
+			}
+			catch (...)
+			{
+				for (size_type j = 0; j < i; j++)
+                	_alloc.destroy(tmp + j);
+				_alloc.deallocate(tmp, new_cap);
+				throw ;
+			}
+			_alloc.deallocate(this->_array, this->_capacity);
+			this->_capacity = new_cap;
+			this->_array = tmp;
+		}
+	}
+
+	template <typename T, typename Allocator>
+	void	vector<T, Allocator>::resize(size_type n, value_type val)
+	{
+		if (n > this->max_size())
+			throw std::logic_error("vector:resize, max_size error");
+		else if (n < this->_size)
+			this->erase(this->begin() + n, this->end());
+		else if (n > this->_size)
+			this->insert(this->end(), n - this->_size, val);
+	}
+
+	/*=================================*/
 	/* Member functions Element access */
 
 	template <typename T, typename Allocator>
@@ -164,6 +237,66 @@ namespace ft
 	vector<T, Allocator>::operator[](size_type n) const
 	{
 		return (this->_array[n]);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::reference
+	vector<T, Allocator>::at(size_type pos)
+	{
+		if (!(pos < _size))
+			throw std::out_of_range("Index out of range");
+		return this->_array[pos];
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::const_reference
+	vector<T, Allocator>::at(size_type pos) const
+	{
+		if (!(pos < _size))
+			throw std::out_of_range("Index out of range");
+		return this->_array[pos];
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::reference
+	vector<T, Allocator>::front()
+	{
+		return (this->_array[0]);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::const_reference
+	vector<T, Allocator>::front() const
+	{
+		return (this->_array[0]);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::reference
+	vector<T, Allocator>::back()
+	{
+		return (this->_array[this->_size - 1]);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::const_reference
+	vector<T, Allocator>::back() const
+	{
+		return (this->_array[this->_size - 1]);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::pointer
+	vector<T, Allocator>::data()
+	{
+		return (this->_array);
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::const_pointer
+	vector<T, Allocator>::data() const
+	{
+		return (this->_array);
 	}
 
 	/*=================================*/
