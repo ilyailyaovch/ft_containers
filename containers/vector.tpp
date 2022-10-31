@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 16:13:39 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 21:52:31 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,11 @@ namespace ft
 	/*=================================*/
 	/*	Canonical form */
 
-	template <class T, class Allocator>
+	template <typename T, typename Allocator>
 	vector<T, Allocator>::vector(const allocator_type &alloc):
-		_size(0),
-		_capacity(0),
-		_array(NULL),
-		_alloc(alloc){}
+	_size(0), _capacity(0), _array(NULL), _alloc(alloc){}
 
-	template <class T, class Allocator>
+	template <typename T, typename Allocator>
 	vector<T, Allocator>::vector(	size_type size,
 									const_reference val,
 									const allocator_type &alloc):
@@ -45,13 +42,38 @@ namespace ft
 		}
 	}
 
-	//template
+	template <typename T, typename Allocator>
+	template <typename InputIterator>
+	vector<T, Allocator>::vector(	InputIterator first, InputIterator last,
+		const allocator_type &alloc,
+		typename enable_if<!is_integral<InputIterator>::value, bool>::type)
+	{
+		difference_type	diff;
+
+		diff = ft::distance(first, last);
+		this->_alloc = alloc;
+		this->_array = _alloc.allocate(diff);
+		this->capacity = diff;
+		this->size = 0;
+		try
+		{
+			while (first != last)
+			{
+				this->push_back(*first);
+				++first;
+			}
+		}
+		catch (...)
+		{
+			this->clear();
+			this->_alloc.deallocate(this->_array, diff);
+			throw ;
+		}
+	}
 
 	template <typename T, typename Allocator>
 	vector<T, Allocator>::vector(const vector &copy):
-		_size(copy._size),
-		_capacity(copy._size),
-		_alloc(copy._alloc)
+	_size(copy._size), _capacity(copy._size), _alloc(copy._alloc)
 	{
 		if (_capacity)
 			_array = _alloc.allocate(_capacity);

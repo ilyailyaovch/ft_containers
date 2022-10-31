@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 16:09:49 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 21:39:53 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ namespace	ft
 			explicit	vector(	size_type size,										//fill
 								const_reference val = value_type(),
 								const	allocator_type &alloc = allocator_type());
-			// iterator later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+			template <typename InputIterator>
+			vector(	InputIterator first, InputIterator last,
+					const allocator_type &alloc = allocator_type(),
+					typename enable_if<!is_integral<InputIterator>::value, bool>::type = true);
 			vector(const vector &copy);
 			vector&	operator=(const vector &rhs);
 			~vector( void );
@@ -117,6 +120,7 @@ namespace	ft
 			allocator_type				get_allocator() const;
 			
 		private:
+			/*	Attributes */
 			size_type			_size;
 			size_type			_capacity;
 			pointer				_array;
