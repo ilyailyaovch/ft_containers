@@ -1,6 +1,10 @@
 #ifndef FT_REVERSE_ITERATOR_TPP
 # define FT_REVERSE_ITERATOR_TPP
 
+/**
+ * https://en.cppreference.com/w/cpp/iterator/reverse_iterator
+ */
+
 namespace	ft
 {
 

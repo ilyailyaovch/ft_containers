@@ -3,6 +3,10 @@
 
 # include "iterator.hpp"
 
+/**
+ * https://en.cppreference.com/w/cpp/iterator/reverse_iterator
+ */
+
 namespace	ft
 {
 	template <typename It>

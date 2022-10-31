@@ -6,12 +6,16 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/30 10:56:15 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 11:43:21 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_TPP
 # define VECTOR_TPP
+
+/**
+ * https://en.cppreference.com/w/cpp/container/vector 
+ * */
 
 namespace ft
 {
@@ -303,6 +307,14 @@ namespace ft
 	/*	Member functions Modifiers */
 	
 	template <typename T, typename Allocator>
+	void	vector<T, Allocator>::clear()
+	{
+		for (size_type i = 0; i < _size; ++i)
+			_alloc.destroy(_array + i);
+		_size = 0;
+	}
+
+	template <typename T, typename Allocator>
 	void	vector<T, Allocator>::swap(vector	&other)
 	{
 		pointer			tmp_array = _array;
@@ -321,15 +333,112 @@ namespace ft
 		_alloc 			= other._alloc;
 		other._alloc 	= tmp_allocator;
 	}
-	
+
 	template <typename T, typename Allocator>
-	void	vector<T, Allocator>::clear()
+	typename vector<T, Allocator>::iterator
+	vector<T, Allocator>::erase(iterator pos)
 	{
-		for (size_type i = 0; i < _size; ++i)
-			_alloc.destroy(_array + i);
-		_size = 0;
+		return (this->erase(pos, pos + 1));
 	}
 
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::iterator
+	vector<T, Allocator>::erase(iterator first, iterator last)
+	{
+		size_type	count;
+		size_type	start;
+		size_type	tmp_start;
+
+		count = last - first;
+		start = first - this->begin();
+		tmp_start = start;
+		while (first != last)
+		{
+			_alloc.destroy(_alloc.address(*first));
+			++first;
+		}
+		while (count != 0 && last < this->end())
+		{
+			_alloc.construct(_alloc.address(this->_array[tmp_start++]), *last);
+			_alloc.destroy(_alloc.address(*last));
+			++last;
+		}
+		this->_size -= count;
+		return (this->begin() + start);
+	}
+
+	template <typename T, typename Allocator>
+	void	vector<T, Allocator>::push_back(const value_type &val)
+	{
+		if (this->_size == this->_capacity)
+		{
+			if (this->_capacity == 0)
+				this->reserve(1);
+			else if (this->max_size() >= this->_capacity * 2)
+				this->reserve(this->_capacity * 2);
+			else
+				this->reserve(this->max_size());
+		}
+		_alloc.construct(this->_array + this->_size, val);
+		this->_size += 1;
+	}
+
+	template <typename T, typename Allocator>
+	void	vector<T, Allocator>::pop_back()
+	{
+		_alloc.destroy(&this->back());
+		this->_size -= 1;
+	}
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::iterator
+	vector<T, Allocator>::insert(const_iterator pos, const value_type& value)
+	{
+		size_type	insertStart;
+
+		insertStart = static_cast<size_type>(pos - this->begin());
+		this->insert(pos, 1, value);
+		return (this->begin() + insertStart);
+	}
+	
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::iterator
+	vector<T, Allocator>::insert( const_iterator pos, size_type count, const T& value )
+	{
+		pointer		tmp;
+		size_type	start;
+		size_type	i;
+		size_type	j;
+
+		start = static_cast<size_type>(pos - this->begin());
+		i = 0;
+		j = 0;
+		if (count <= 0)
+			return ;
+		else if (pos < this->begin() && pos > this->end())
+			throw std::out_of_range("Insert: position is out of range");
+		else if (this->max_size() < this->_size + count)
+			throw std::out_of_range("Insert: too many values");
+		if (this->_size + count > this->_capacity)
+		{
+			tmp = _alloc.allocate(this->_size + count);
+			try
+			{
+				
+			}
+			catch(...)
+			{
+				
+			}
+		}
+		else
+		{
+
+		}
+		this->_size = this->_size + count;
+		return (this->begin() + start);
+	}
+	
 	/*=================================*/
 	/*	Non-member functions (operators) */
 
@@ -385,6 +494,5 @@ namespace ft
 	}
 	
 }	//end of "namespace	ft"
-
 
 #endif

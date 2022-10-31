@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/30 11:20:19 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 11:17:10 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include "../iterators/random_access_iterator.hpp"   
 # include "../iterators/reverse_iterator.hpp"
 # include "../utils/algorithm.hpp"
+
+/**
+ * https://en.cppreference.com/w/cpp/container/vector 
+ * */
 
 namespace	ft
 {
@@ -90,10 +94,17 @@ namespace	ft
 
 		public:
 			/*	Member functions (Modifiers) */
-			void						swap(vector &other);
 			void						clear();
-			// iterator					erase(iterator pos);
-			// iterator					erase(iterator first, iterator last);
+			void						swap(vector &other);
+			iterator					erase(iterator pos);
+			iterator					erase(iterator first, iterator last);
+			void						push_back(const value_type &val);
+			void						pop_back();
+			iterator 					insert( const_iterator pos, const value_type& value );
+			iterator 					insert( const_iterator pos, size_type count, const T& value );
+			// template< class InputIt >
+			// iterator 					insert( const_iterator pos, InputIt first, InputIt last );
+			//assign *3
 
 		private:
 			size_type			_size;

@@ -3,6 +3,10 @@
 
 # include "iterator.hpp"
 
+/**
+ * https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
+ */
+
 namespace	ft
 {
 	template <typename T>

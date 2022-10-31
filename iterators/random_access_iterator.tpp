@@ -1,6 +1,10 @@
 #ifndef FT_RANDOM_ACCESS_ITERATOR_TPP
 # define FT_RANDOM_ACCESS_ITERATOR_TPP
 
+/**
+ * https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
+ */
+
 namespace ft
 {
 	/*=================================*/
