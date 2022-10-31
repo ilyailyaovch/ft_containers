@@ -6,16 +6,12 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 11:43:21 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 14:31:31 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_TPP
 # define VECTOR_TPP
-
-/**
- * https://en.cppreference.com/w/cpp/container/vector 
- * */
 
 namespace ft
 {
@@ -424,20 +420,54 @@ namespace ft
 			tmp = _alloc.allocate(this->_size + count);
 			try
 			{
-				
+				for (; i < start; ++i)
+					_alloc.construct(tmp + i, this->_array[i]);
+				for (; j < count; ++j)
+					_alloc.construct(tmp + i + j, value);
+				for (; i + j < (this->_size + count); ++i)
+					_alloc.construct(tmp + i + j, this->_array[i]);
+				for (size_type t = 0; i < this->_size; ++t)
+					_alloc.destroy(_alloc.address(this->_array[t]));
 			}
 			catch(...)
 			{
-				
+				for (size_type t = 0; t < i + j; t++)
+                	_alloc.destroy(tmp + t);
+				_alloc.deallocate(tmp, this->_size + count);
+				throw ;
 			}
+			this->_alloc.deallocate(this->_array, this->_capacity);
+			this->_capacity = this->_size + count;
+			this->_array = tmp;
 		}
 		else
 		{
-
+			for (size_type t = this->_size + count - 1; t >= start; --t)
+			{
+				if (t >= start && t < start + count)
+					_alloc.construct(this->_array + t, value);
+				else if (t >= this->_size)
+					_alloc.construct(this->_array + t, this->_array[t - count]);
+				else if (t <= this->_size && t >= start + count)
+				{
+					_alloc.destroy(this->_array + t);
+					_alloc.construct(this->_array + t, this->_array[t - count]);
+				}
+				if (t == 0)
+					break ;
+			}
 		}
 		this->_size = this->_size + count;
 		return (this->begin() + start);
 	}
+	
+	// template <typename T, typename Allocator>
+	// template <typename InputIt>
+	// void	vector<T, Allocator>::insert(iterator pos, InputIt first, InputIt last,
+	// typename enable_if<!is_integral<InputIt>::value, bool>::type)
+	// {
+		
+	// }
 	
 	/*=================================*/
 	/*	Non-member functions (operators) */

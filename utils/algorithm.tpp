@@ -2,14 +2,13 @@
 # define FT_ALGORITHM_TPP
 
 # ifndef FT_ALGORITHM_HPP
-#  error algorithm_impl.tpp should only be included from algorithm.hpp.
+#  error algorithm.tpp should only be included from algorithm.hpp.
 # endif
 
 namespace	ft
 {
 	/*=================================*/
-	/*               Equal             */
-	/*=================================*/
+	/*	Equal */
 
 	template <typename InputIt1, typename InputIt2>
 	bool	equal(InputIt1 first1, InputIt1 last1, InputIt2 first2)
@@ -25,8 +24,7 @@ namespace	ft
 	}
 
 	/*====================================*/
-	/*       Lexicographical_compare      */
-	/*====================================*/
+	/*	Lexicographical_compare */
 
 	template <typename InputIt1, typename InputIt2>
 	bool	lexicographical_compare(InputIt1 first1, InputIt1 last1,

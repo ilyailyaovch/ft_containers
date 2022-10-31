@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 11:17:10 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 12:18:42 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include "../utils/algorithm.hpp"
 
 /**
- * https://en.cppreference.com/w/cpp/container/vector 
+ * https://en.cppreference.com/w/cpp/container/vector
+ * https://en.cppreference.com/w/cpp/named_req/Allocator
+ * https://en.cppreference.com/w/cpp/types/enable_if
  * */
 
 namespace	ft
@@ -102,8 +104,9 @@ namespace	ft
 			void						pop_back();
 			iterator 					insert( const_iterator pos, const value_type& value );
 			iterator 					insert( const_iterator pos, size_type count, const T& value );
-			// template< class InputIt >
-			// iterator 					insert( const_iterator pos, InputIt first, InputIt last );
+			template <typename InputIt>
+			void	insert(	iterator pos, InputIt first, InputIt last,
+							typename enable_if<!is_integral<InputIt>::value, bool>::type = true);
 			//assign *3
 
 		private:

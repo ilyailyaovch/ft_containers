@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 16:18:08 by vismaily          #+#    #+#             */
-/*   Updated: 2022/10/28 14:17:09 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 14:28:16 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 namespace	ft
 {
-	/* Equal */
+	/*	Equal */
 
 	template <typename InputIt1, typename InputIt2>
 	bool	equal(InputIt1 first1, InputIt1 last1, InputIt2 first2);
 
-	/* Lexicographical_compare */
+	/*	Lexicographical_compare */
 
 	template <typename InputIt1, typename InputIt2>
 	bool	lexicographical_compare(InputIt1 first1, InputIt1 last1,
