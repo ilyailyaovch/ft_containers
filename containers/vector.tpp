@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 14:31:31 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 16:13:39 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ namespace ft
 		_alloc(alloc){}
 
 	template <class T, class Allocator>
-	vector<T, Allocator>::vector(size_type size,
-		const_reference val,
-		const allocator_type &alloc):
-		_size(size),
-		_capacity(size),
-		_alloc(alloc)
+	vector<T, Allocator>::vector(	size_type size,
+									const_reference val,
+									const allocator_type &alloc):
+	_size(size), _capacity(size), _alloc(alloc)
 	{
 		_array = _alloc.allocate(_capacity);
 		try
@@ -47,7 +45,7 @@ namespace ft
 		}
 	}
 
-	//
+	//template
 
 	template <typename T, typename Allocator>
 	vector<T, Allocator>::vector(const vector &copy):
@@ -70,17 +68,23 @@ namespace ft
 		}
 	}
 
-	// template <typename T, typename Allocator>
-	// vector<T, Allocator>&	vector<T, Allocator>::operator=(const vector &rhs)
-	// {
-	// 	if (this != &other)
-	// 	{
-	// 		this->clear();
-	// 		_alloc.deallocate(_array, _capacity);
-
-	// 	}
-	// 	return (*this);
-	// }
+	template <typename T, typename Allocator>
+	vector<T, Allocator>&	vector<T, Allocator>::operator=(const vector &rhs)
+	{
+		if (this != &rhs)
+		{
+			this->clear();
+			if (this->_array != 0)
+				_alloc.deallocate(this->_array, this->_capacity);
+			this->_alloc = rhs._alloc;
+			this->_array = _alloc.allocate(rhs._capacity);
+			this->_capacity = rhs._capacity;
+			this->_size = 0;
+			while (this->_size != rhs._size)
+				this->push_back(rhs[this->_size]);
+		}
+		return (*this);
+	}
 
 	template <typename T, typename Allocator>
 	vector<T, Allocator>::~vector()
@@ -399,7 +403,7 @@ namespace ft
 	
 	template <typename T, typename Allocator>
 	typename vector<T, Allocator>::iterator
-	vector<T, Allocator>::insert( const_iterator pos, size_type count, const T& value )
+	vector<T, Allocator>::insert(const_iterator pos, size_type count, const T& value)
 	{
 		pointer		tmp;
 		size_type	start;
@@ -416,8 +420,13 @@ namespace ft
 		else if (this->max_size() < this->_size + count)
 			throw std::out_of_range("Insert: too many values");
 		if (this->_size + count > this->_capacity)
-		{
-			tmp = _alloc.allocate(this->_size + count);
+		{	
+			// size_type new_capacity = this->_capacity;
+			// while (new_capacity < this->_size + count)
+			// 	new_capacity *= 2
+			// tmp = _alloc.allocate(new_capacity);
+			size_type new_capacity = this->_size + count;
+			tmp = _alloc.allocate(new_capacity);
 			try
 			{
 				for (; i < start; ++i)
@@ -437,7 +446,7 @@ namespace ft
 				throw ;
 			}
 			this->_alloc.deallocate(this->_array, this->_capacity);
-			this->_capacity = this->_size + count;
+			this->_capacity = new_capacity;
 			this->_array = tmp;
 		}
 		else
@@ -461,14 +470,104 @@ namespace ft
 		return (this->begin() + start);
 	}
 	
-	// template <typename T, typename Allocator>
-	// template <typename InputIt>
-	// void	vector<T, Allocator>::insert(iterator pos, InputIt first, InputIt last,
-	// typename enable_if<!is_integral<InputIt>::value, bool>::type)
-	// {
-		
-	// }
+	template <typename T, typename Allocator>
+	template <typename InputIt>
+	void	vector<T, Allocator>::insert(iterator pos, InputIt first, InputIt last,
+			typename enable_if<!is_integral<InputIt>::value, bool>::type)
+	{
+		pointer		tmp;
+		size_type	start;
+		size_type	i, j;
+		size_type	count;
+
+		count = static_cast<size_type>(ft::distance(first, last));
+		start = static_cast<size_type>(pos - this->begin());
+		i = 0;
+		j = 0;
+		if (count == 0)
+			return ;
+		else if (pos < this->begin() && pos > this->end())
+			throw std::logic_error("Insert: position is out of range");
+		else if (this->max_size() < this->_size + count)
+			throw std::length_error("Insert: too many values");
+		if (this->_size + count > this->_capacity)
+		{
+			// size_type new_capacity = this->_capacity;
+			// while (new_capacity < this->_size + count)
+			// 	new_capacity *= 2
+			// tmp = _alloc.allocate(new_capacity);
+			size_type new_capacity = this->_size + count;
+			tmp = _alloc.allocate(new_capacity);
+			try
+			{
+				for (; i < start; ++i)
+					_alloc.construct(tmp + i, this->_array[i]);
+				for (; j < count; ++j)
+					_alloc.construct(tmp + i + j, *(first++));
+				for (; i + j < (this->_size + count); ++i)
+					_alloc.construct(tmp + i + j, this->_array[i]);
+				for (int t = 0; i < this->_size; ++t)
+					_alloc.destroy(_alloc.address(this->_array[t]));
+			}
+			catch (...)
+			{
+				for (size_type t = 0; t < i + j; t++)
+                	_alloc.destroy(tmp + t);
+				_alloc.deallocate(tmp, this->_size + count);
+				throw ;
+			}
+			this->_alloc.deallocate(this->_array, this->_capacity);
+			this->_capacity = new_capacity;
+			this->_array = tmp;
+		}
+		else
+		{
+			for (size_type t = this->_size + count - 1; t >= start; --t)
+			{
+				if (t >= start && t < start + count)
+					_alloc.construct(this->_array + t, *(--last));
+				else if (t >= this->_size)
+					this->_alloc.construct(this->_array + t, this->_array[t - count]);
+				else if (t <= this->_size && t >= start + count)
+				{
+					_alloc.destroy(this->_array + t);
+					_alloc.construct(this->_array + t, this->_array[t - count]);
+				}
+				if (t == 0)
+					break ;
+			}
+		}
+		this->_size = this->_size + count;
+	}
 	
+	template <typename T, typename Allocator>
+	void	vector<T, Allocator>::assign(size_type n, const value_type &val)
+	{
+		this->erase(this->begin(), this->end());
+		this->reserve(n);
+		this->insert(this->begin(), n, val);
+	}
+
+	template <typename T, typename Allocator>
+	template <typename InputIt>
+	void	vector<T, Allocator>::assign(InputIt first, InputIt last,
+			typename enable_if<!is_integral<InputIt>::value, bool>::type)
+	{
+		this->erase(this->begin(), this->end());
+		this->reserve(ft::distance(first, last));
+		this->insert(this->begin(), first, last);
+	}
+
+	/*=================================*/
+	/*	Member functions (Allocator) */
+
+	template <typename T, typename Allocator>
+	typename vector<T, Allocator>::allocator_type
+	vector<T, Allocator>::get_allocator() const
+	{
+		return (this->_alloc);
+	}
+
 	/*=================================*/
 	/*	Non-member functions (operators) */
 

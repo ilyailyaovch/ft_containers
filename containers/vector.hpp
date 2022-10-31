@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 12:18:42 by ilya             ###   ########.fr       */
+/*   Updated: 2022/10/31 16:09:49 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../iterators/random_access_iterator.hpp"   
 # include "../iterators/reverse_iterator.hpp"
 # include "../utils/algorithm.hpp"
+# include "../utils/type_traits.hpp"
 
 /**
  * https://en.cppreference.com/w/cpp/container/vector
@@ -30,7 +31,6 @@ namespace	ft
 {
 	/*	generic template */
 	template < class T, class Allocator = std::allocator<T> >
-
 	class vector
 	{
 		public:
@@ -58,8 +58,8 @@ namespace	ft
 								const	allocator_type &alloc = allocator_type());
 			// iterator later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 			vector(const vector &copy);
-			//vector&	operator=(const vector &rhs); ///NOT YET
-			~vector(void);
+			vector&	operator=(const vector &rhs);
+			~vector( void );
 
 		public:
 			/*	Member functions (Iterators) */
@@ -104,11 +104,18 @@ namespace	ft
 			void						pop_back();
 			iterator 					insert( const_iterator pos, const value_type& value );
 			iterator 					insert( const_iterator pos, size_type count, const T& value );
+			void						assign(size_type n, const value_type &val);
 			template <typename InputIt>
 			void	insert(	iterator pos, InputIt first, InputIt last,
 							typename enable_if<!is_integral<InputIt>::value, bool>::type = true);
-			//assign *3
-
+			template <typename InputIt>
+			void	assign(	InputIt first, InputIt last,
+							typename enable_if<!is_integral<InputIt>::value, bool>::type = true);
+		
+		public:
+			/*	Member functions (Allocator) */
+			allocator_type				get_allocator() const;
+			
 		private:
 			size_type			_size;
 			size_type			_capacity;
