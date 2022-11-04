@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:58:11 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 19:38:48 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 19:48:47 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	example1()
 	st.pop();
 	std::cout << ", pop(), top: " << st.top();
 	std::cout << ", empty(): " << st.empty();
-	std::cout << ", size(): " << st.size() << '.' << std::endl;
+	std::cout << ", size(): " << st.size() << std::endl;
 	
 	return (EXIT_SUCCESS);
 }
@@ -73,5 +73,4 @@ void	stackTest(void)
 
 	example1();
 	example2();
-	
 }

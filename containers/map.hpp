@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:13:07 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 18:57:39 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 19:47:22 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ namespace	ft
 		typename Allocator = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
-		
 		public:
 			/*	Member types */
 			typedef Key						key_type;

@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:54 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 15:07:13 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 20:07:51 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ namespace ft
 
 	// prefix	(++a)
 	template <typename T>
-	random_access_iterator<T>	&random_access_iterator<T>::operator++()
+	random_access_iterator<T>&
+	random_access_iterator<T>::operator++()
 	{
 		this->_elem += 1;
 		return (*this);
@@ -73,7 +74,8 @@ namespace ft
 
 	// prefix	(--a)
 	template <typename T>
-	random_access_iterator<T>	&random_access_iterator<T>::operator--()
+	random_access_iterator<T>&
+	random_access_iterator<T>::operator--()
 	{
 		this->_elem -= 1;
 		return (*this);
@@ -81,7 +83,8 @@ namespace ft
 
 	// postfix	(a++)
 	template <typename T>
-	random_access_iterator<T>	random_access_iterator<T>::operator++(int)
+	random_access_iterator<T>
+	random_access_iterator<T>::operator++(int)
 	{
 		random_access_iterator<T>	temp;
 		temp = *this;
@@ -91,7 +94,8 @@ namespace ft
 
 	// postfix	(a--)
 	template <typename T>
-	random_access_iterator<T>	random_access_iterator<T>::operator--(int)
+	random_access_iterator<T>
+	random_access_iterator<T>::operator--(int)
 	{
 		random_access_iterator<T>	temp;
 		temp = *this;

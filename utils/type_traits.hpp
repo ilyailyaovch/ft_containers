@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:14 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:36:18 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 20:11:39 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ namespace	ft
 	/**		Is_integral
 	 * Checks whether T is an integral type.
 	 * Provides the member constant value which is equal to true,
-	 * if T is the type bool, char, char8_t (since C++20), char16_t,
-	 * char32_t, wchar_t, short, int, long, long long,
+	 * if T is the type bool, char, short, int ...
 	 * or any implementation-defined extended integer types,
 	 * including any signed, unsigned, and cv-qualified variants.
 	 * Otherwise, value is equal to false.
