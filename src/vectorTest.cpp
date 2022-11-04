@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 17:17:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/01 14:33:57 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 19:39:18 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,29 @@ int example3(void)	//Capacity
 	return (EXIT_SUCCESS);
 }
 
+int example4(void)	//non-members
+{
+	std::cout << BOLDGREEN << "Example 3" << RESET << std::endl;
+	std::cout << GREEN << "non-members" << RESET << std::endl;
+	ft::vector<int> 	second (3, 42);                       // four ints with value 100
+	ft::vector<int> 	third (second);                       // four ints with value 100
+	second.push_back(667);
+	third.push_back(667);
+	
+	std::cout << "non-mem: ==: " << (third == second);
+	std::cout << std::endl;
+	
+	return (EXIT_SUCCESS);
+}
+
 void	vectorTest(void)
 {
+	std::cout << BOLDBLUE << "=================================" << RESET << std::endl;
+	std::cout << BOLDBLUE << "===========VectorTest============" << RESET << std::endl;
+	std::cout << BOLDBLUE << "=================================" << RESET << std::endl;
+	
 	example1();	//Iterators
 	example2();	//Elem access
 	example3();	//Capacity
+	example4();	//non-members
 }

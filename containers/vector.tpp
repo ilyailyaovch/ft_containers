@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 21:52:31 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 19:31:44 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -604,7 +604,7 @@ namespace ft
 	bool	operator==(	const vector<T, Allocator> &lhs,
 						const vector<T, Allocator> &rhs)
 	{
-		if (lhs._size != rhs._size)
+		if (lhs.size() != rhs.size())
 			return (false);
 		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
