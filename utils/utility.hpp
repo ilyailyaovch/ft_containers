@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:26 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:41:00 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 15:01:26 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ namespace	ft
 	template <typename T1, typename T2>
 	pair<T1, T2>	make_pair(T1 x, T2 y);
 	
-
 }	//end of "namespace	ft"
+
+# include "utility.tpp"
 
 #endif

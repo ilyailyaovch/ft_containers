@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:13:07 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:39:21 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 15:07:48 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ namespace	ft
 			typedef value_type				*pointer;
 			typedef const value_type		*const_pointer;
 			
-	}	//end of "class map"
+	};	//end of "class map"
 
-	
-}		//end of "namespace	ft"
+}	//end of "namespace	ft"
 
 #endif

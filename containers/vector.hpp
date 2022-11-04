@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:16:58 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 15:07:39 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ namespace	ft
 	template <typename T, typename Allocator>
 	bool	operator>=(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs);
 	
-}		//end of "namespace	ft"
+}	//end of "namespace	ft"
 
 # include "vector.tpp"
 

@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:54 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:27:55 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 15:07:13 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,6 @@ namespace ft
 		return (rhs + n);
 	}
 
-};	//end of "namespace	ft"
+}	//end of "namespace	ft"
 
 #endif
