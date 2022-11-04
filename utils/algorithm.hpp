@@ -6,12 +6,19 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 16:18:08 by vismaily          #+#    #+#             */
-/*   Updated: 2022/10/31 14:28:16 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 14:31:27 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ALGORITHM_HPP
 # define FT_ALGORITHM_HPP
+
+/**
+ * https://en.cppreference.com/w/cpp/header/algorithm
+ * https://en.cppreference.com/w/cpp/algorithm/equal
+ * https://en.cppreference.com/w/cpp/algorithm/lexicographical_compare
+ */
+
 
 namespace	ft
 {

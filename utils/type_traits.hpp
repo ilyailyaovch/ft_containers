@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:14 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:27:15 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 14:36:18 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ namespace	ft
 	typedef ft::integral_constant<bool, true>	true_type;
 	typedef ft::integral_constant<bool, false>	false_type;
 
-	/**		Is_integral 
+	/**		Is_integral
 	 * Checks whether T is an integral type.
 	 * Provides the member constant value which is equal to true,
 	 * if T is the type bool, char, char8_t (since C++20), char16_t,
