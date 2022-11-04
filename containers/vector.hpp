@@ -6,20 +6,19 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/10/31 21:39:53 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/04 14:16:58 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-# include <memory> 				/*	std::allocator */
-# include <stdexcept>			/* 	try...catch */
-# include <iostream>			/*	std::cout */
-# include "../iterators/random_access_iterator.hpp"   
-# include "../iterators/reverse_iterator.hpp"
-# include "../utils/algorithm.hpp"
-# include "../utils/type_traits.hpp"
+# include <memory> 										/*	std::allocator */
+# include <stdexcept>									/* 	try...catch */
+# include "../iterators/random_access_iterator.hpp"		/*	random_access_iterator */
+# include "../iterators/reverse_iterator.hpp"			/*	reverse_iterator */
+# include "../utils/algorithm.hpp"						/*	equal & lex_compare */
+# include "../utils/type_traits.hpp"					/*	enable_if & is_integral */
 
 /**
  * https://en.cppreference.com/w/cpp/container/vector
