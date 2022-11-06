@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:13:07 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 19:47:22 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/06 21:06:49 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 # include <memory>					/*	std::allocator */
 # include <stdexcept>				/* 	try...catch */
-# include <../utils/utility.hpp>	/*	ft::pair */
-# include <../utils/functional.hpp>	/*	ft::less */
+# include "../utils/utility.hpp"	/*	ft::pair */
+# include "../utils/functional.hpp"	/*	ft::less */
 # include "../utils/algorithm.hpp"	/*	equal & lex_compare */
+# include "../utils/rb_tree.hpp"	/*	ft::rb_tree */
 
 /**
  * https://en.cppreference.com/w/cpp/container/map
@@ -35,21 +36,38 @@ namespace	ft
 	{
 		public:
 			/*	Member types */
-			typedef Key						key_type;
-			typedef T						mapped_type;
-			typedef ft::pair<const Key, T>	value_type;
-			typedef Compare					key_compare;
-			typedef size_t					size_type;
-			typedef ptrdiff_t				difference_type;
-			typedef Allocator				allocator_type;
-			typedef value_type				&reference;
-			typedef const value_type		&const_reference;
-			typedef value_type				*pointer;
-			typedef const value_type		*const_pointer;
+			typedef Key											key_type;
+			typedef T											mapped_type;
+			typedef ft::pair<const Key, T>						value_type;
+			typedef Compare										key_compare;
+			typedef Allocator									allocator_type;			
+			typedef typename allocator_type::reference			reference;
+			typedef typename allocator_type::const_reference	const_reference;
+			typedef typename allocator_type::pointer			pointer;
+			typedef typename allocator_type::const_pointer		const_pointer;
+			typedef typename allocator_type::size_type			size_type;		//size_t
+			typedef typename allocator_type::difference_type	difference_type;//ptrdiff_t
 
 		public:
-			/*	Canonical form */
-			//
+			/*	Member class */
+			class value_compare
+			{
+				friend class map<key_type, value_type, key_compare, allocator_type>;
+				protected:
+					Compare comp;
+					value_compare(Compare c){this->comp = c;}
+				public:
+					bool operator()(const value_type & x, const value_type & y) const 
+					{
+						return comp(x.first, y.first);
+					} 
+			};
+			
+		public:
+			/*	Member types (Iterators) */
+			typedef	typename rb_tree<value_type, value_compare, allocator_type>	rb_tree
+			typedef rb_tree::iterator	iterator;
+			
 			
 	};	//end of "class map"
 
