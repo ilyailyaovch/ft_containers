@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:59 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/07 14:11:25 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 19:07:57 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ namespace	ft
 	template <typename It1, typename It2>
 	bool	operator>=(	const reverse_iterator<It1> &lhs,
 						const reverse_iterator<It2> &rhs);
-	
+
 	template <typename It>
 	reverse_iterator<It> 
 	operator+(	typename reverse_iterator<It>::difference_type n,
@@ -94,6 +94,11 @@ namespace	ft
 	typename reverse_iterator<It>::difference_type
 	operator-(	const reverse_iterator<It> &lhs,
 				const reverse_iterator<It> &rhs);
+
+	template <typename L_It, typename R_It>
+	typename reverse_iterator<R_It>::difference_type
+	operator-(	const reverse_iterator<L_It> &lhs,
+				const reverse_iterator<R_It> &rhs);
 
 }	//end of "namespace	ft"
 

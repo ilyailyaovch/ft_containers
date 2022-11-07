@@ -6,12 +6,12 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:57 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/07 14:21:38 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 19:01:03 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_RANDOM_ACCESS_ITERATOR_HPP
-# define FT_RANDOM_ACCESS_ITERATOR_HPP
+#ifndef RANDOM_ACCESS_ITERATOR_HPP
+# define RANDOM_ACCESS_ITERATOR_HPP
 
 # include "iterator.hpp"
 
@@ -22,9 +22,9 @@
 namespace	ft
 {
 	template <typename T>
-	class random_access_iterator : public ft::iterator <ft::random_access_iterator_tag, T>
-	// class random_access_iterator : public ft::iterator<	typename ft::iterator_traits<T *>::iterator_category,
-	// 													typename ft::iterator_traits<T *>::value_type>
+	// class random_access_iterator : public ft::iterator <ft::random_access_iterator_tag, T>
+	class random_access_iterator : public ft::iterator<	typename ft::iterator_traits<T *>::iterator_category,
+														typename ft::iterator_traits<T *>::value_type>
 	{
 		public:
 			/*	Member types defines */
@@ -42,6 +42,7 @@ namespace	ft
 			random_access_iterator(pointer ptr);
 			random_access_iterator(const random_access_iterator &other);
 			random_access_iterator&		operator=(const random_access_iterator &other);
+			operator 					random_access_iterator<const T> () const;
 			virtual						~random_access_iterator();
 		public:
 			/*	Property */
@@ -53,7 +54,7 @@ namespace	ft
 			random_access_iterator<T>&		operator--();
 			random_access_iterator<T>		operator++(int);// postfix	
 			random_access_iterator<T>		operator--(int);
-			reference						operator[](difference_type num) const	{return *(_elem + num);}
+			reference						operator[](difference_type num) const;
 			random_access_iterator<T>		operator+(difference_type num) const;
 			random_access_iterator<T>		operator-(difference_type num) const;
 			difference_type					operator-(const random_access_iterator<T> &other) const;
@@ -64,7 +65,7 @@ namespace	ft
 			bool							operator>=(const random_access_iterator<T> &other) const;
 			bool							operator<=(const random_access_iterator<T> &other) const;
 			pointer							base() const;
-		protected:
+		private:
 			pointer						_elem;
 	};	//end of "random_access_iterator"
 

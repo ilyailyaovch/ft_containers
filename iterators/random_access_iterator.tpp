@@ -6,12 +6,12 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:54 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/07 14:02:39 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 19:00:22 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_RANDOM_ACCESS_ITERATOR_TPP
-# define FT_RANDOM_ACCESS_ITERATOR_TPP
+#ifndef RANDOM_ACCESS_ITERATOR_TPP
+# define RANDOM_ACCESS_ITERATOR_TPP
 
 /**
  * https://en.cppreference.com/w/cpp/named_req/RandomAccessIterator
@@ -24,7 +24,7 @@ namespace ft
 
 	template <typename T>
 	random_access_iterator<T>::random_access_iterator():
-		_elem(NULL){}
+		_elem(nullptr){}
 
 	template <typename T>
 	random_access_iterator<T>::random_access_iterator(pointer ptr):
@@ -41,6 +41,12 @@ namespace ft
 		if (this != &other)
 			this->_elem = other._elem;
 		return (*this);
+	}
+
+	template<typename T>
+	random_access_iterator<T>::operator random_access_iterator<const T> () const
+	{
+		return (random_access_iterator<const T>(this->_elem));
 	}
 
 	template <typename T>
@@ -101,6 +107,13 @@ namespace ft
 		temp = *this;
 		this->_elem -= 1;
 		return (temp);
+	}
+
+	template <typename T>
+	typename random_access_iterator<T>::reference
+	random_access_iterator<T>::operator[](difference_type num) const
+	{
+		return (*(this->_elem + num));
 	}
 
 	//	a + n

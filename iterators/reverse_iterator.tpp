@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:28:02 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 15:07:04 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 19:07:29 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,14 @@ namespace	ft
 				const reverse_iterator<It> &it)
 	{
 		return (it + n);
+	}
+
+	template <typename L_It, typename R_It>
+	typename reverse_iterator<R_It>::difference_type
+	operator-(	const reverse_iterator<L_It> &lhs,
+				const reverse_iterator<R_It> &rhs)
+	{
+		return (rhs.base() - lhs.base());
 	}
 	
 }	//end of "namespace	ft"
