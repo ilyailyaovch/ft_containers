@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:57 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:27:57 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:21:38 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 namespace	ft
 {
 	template <typename T>
-	// class random_access_iterator : public ft::iterator <ft::random_access_iterator_tag, T>
-	class random_access_iterator : public ft::iterator<	typename ft::iterator_traits<T *>::iterator_category,
-														typename ft::iterator_traits<T *>::value_type>
+	class random_access_iterator : public ft::iterator <ft::random_access_iterator_tag, T>
+	// class random_access_iterator : public ft::iterator<	typename ft::iterator_traits<T *>::iterator_category,
+	// 													typename ft::iterator_traits<T *>::value_type>
 	{
 		public:
 			/*	Member types defines */

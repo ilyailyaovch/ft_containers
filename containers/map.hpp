@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:13:07 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/06 21:06:49 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 01:02:50 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ namespace	ft
 			
 		public:
 			/*	Member types (Iterators) */
-			typedef	typename rb_tree<value_type, value_compare, allocator_type>	rb_tree
-			typedef rb_tree::iterator	iterator;
+			typedef rb_tree<value_type, value_compare, allocator_type>	rb_tree;
+			typedef typename rb_tree::iterator	iterator;
 			
 			
 	};	//end of "class map"

@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 19:31:44 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 18:10:06 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,27 @@ namespace ft
 	template <typename T, typename Allocator>
 	vector<T, Allocator>::vector(	size_type size,
 									const_reference val,
-									const allocator_type &alloc):
-	_size(size), _capacity(size), _alloc(alloc)
+									const allocator_type &alloc)
 	{
-		_array = _alloc.allocate(_capacity);
+		size_type	i;
+
+		_alloc = alloc;
+		_array = size ? _alloc.allocate(size) : NULL;
+		_capacity = size;
+		_size = 0;
 		try
 		{
-			for (size_type i = 0; i < _size; ++i)
-				_alloc.construct(&_array[i], val);
+			for (i = 0; i < size; ++i)
+			{
+				_alloc.construct(_array + i, val);
+				_size += 1;
+			}
 		}
-		catch(...)
+		catch (...)
 		{
 			this->clear();
-			_alloc.deallocate(_array, _capacity);
-			throw  ;
+			this->_alloc.deallocate(this->_array, size);
+			throw ;
 		}
 	}
 
@@ -53,8 +60,8 @@ namespace ft
 		diff = ft::distance(first, last);
 		this->_alloc = alloc;
 		this->_array = _alloc.allocate(diff);
-		this->capacity = diff;
-		this->size = 0;
+		this->_capacity = diff;
+		this->_size = 0;
 		try
 		{
 			while (first != last)
@@ -72,22 +79,14 @@ namespace ft
 	}
 
 	template <typename T, typename Allocator>
-	vector<T, Allocator>::vector(const vector &copy):
-	_size(copy._size), _capacity(copy._size), _alloc(copy._alloc)
+	vector<T, Allocator>::vector(const vector &copy)
 	{
-		if (_capacity)
-			_array = _alloc.allocate(_capacity);
-		try
-		{
-			for (size_type i = 0; i < _size; ++i)
-				_alloc.construct(&_array[i], copy._array[i]);	
-		}
-		catch(...)
-		{
-			this->clear();
-			_alloc.deallocate(_array, _capacity);
-			throw ;
-		}
+		this->_alloc = copy._alloc;
+		this->_array = this->_alloc.allocate(copy._capacity);
+		this->_capacity = copy._capacity;
+		this->_size = 0;
+		while (this->_size != copy._size)
+			this->push_back(copy[this->_size]);
 	}
 
 	template <typename T, typename Allocator>
@@ -247,7 +246,7 @@ namespace ft
 		else if (n > this->_size)
 			this->insert(this->end(), n - this->_size, val);
 	}
-
+	
 	/*=================================*/
 	/* Member functions Element access */
 
@@ -414,7 +413,7 @@ namespace ft
 
 	template <typename T, typename Allocator>
 	typename vector<T, Allocator>::iterator
-	vector<T, Allocator>::insert(const_iterator pos, const value_type& value)
+	vector<T, Allocator>::insert(iterator pos, const T &value)
 	{
 		size_type	insertStart;
 
@@ -422,19 +421,17 @@ namespace ft
 		this->insert(pos, 1, value);
 		return (this->begin() + insertStart);
 	}
-	
+
 	template <typename T, typename Allocator>
-	typename vector<T, Allocator>::iterator
-	vector<T, Allocator>::insert(const_iterator pos, size_type count, const T& value)
+	void
+	vector<T, Allocator>::insert(iterator pos, size_type count, const T &value)
 	{
 		pointer		tmp;
 		size_type	start;
-		size_type	i;
-		size_type	j;
+		size_type	i = 0;
+		size_type	j = 0;
 
 		start = static_cast<size_type>(pos - this->begin());
-		i = 0;
-		j = 0;
 		if (count <= 0)
 			return ;
 		else if (pos < this->begin() && pos > this->end())
@@ -442,7 +439,7 @@ namespace ft
 		else if (this->max_size() < this->_size + count)
 			throw std::out_of_range("Insert: too many values");
 		if (this->_size + count > this->_capacity)
-		{	
+		{
 			// size_type new_capacity = this->_capacity;
 			// while (new_capacity < this->_size + count)
 			// 	new_capacity *= 2
@@ -489,7 +486,6 @@ namespace ft
 			}
 		}
 		this->_size = this->_size + count;
-		return (this->begin() + start);
 	}
 	
 	template <typename T, typename Allocator>
@@ -499,13 +495,11 @@ namespace ft
 	{
 		pointer		tmp;
 		size_type	start;
-		size_type	i, j;
+		size_type	i = 0, j = 0;
 		size_type	count;
 
 		count = static_cast<size_type>(ft::distance(first, last));
 		start = static_cast<size_type>(pos - this->begin());
-		i = 0;
-		j = 0;
 		if (count == 0)
 			return ;
 		else if (pos < this->begin() && pos > this->end())
@@ -563,11 +557,11 @@ namespace ft
 	}
 	
 	template <typename T, typename Allocator>
-	void	vector<T, Allocator>::assign(size_type n, const value_type &val)
+	void	vector<T, Allocator>::assign(size_type nbr, const value_type &val)
 	{
 		this->erase(this->begin(), this->end());
-		this->reserve(n);
-		this->insert(this->begin(), n, val);
+		this->reserve(nbr);
+		this->insert(this->begin(), nbr, val);
 	}
 
 	template <typename T, typename Allocator>

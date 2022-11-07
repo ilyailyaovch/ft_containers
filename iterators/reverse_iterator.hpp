@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:59 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 14:28:00 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:11:25 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ namespace	ft
 		public:
 			/*	Canonical form */
 			reverse_iterator();
-			explicit			reverse_iterator(iterator_type it);
-			reverse_iterator	&operator=(const reverse_iterator &other);
+			explicit				reverse_iterator(iterator_type it);
+			reverse_iterator<It>	&operator=(const reverse_iterator &other);
 			template <typename Iter>
 			reverse_iterator (const reverse_iterator<Iter> &other);
 			virtual			~reverse_iterator();

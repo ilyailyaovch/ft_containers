@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 15:07:39 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/07 17:49:41 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <memory> 										/*	std::allocator */
 # include <stdexcept>									/* 	try...catch */
+# include <cstddef>
 # include "../iterators/random_access_iterator.hpp"		/*	random_access_iterator */
 # include "../iterators/reverse_iterator.hpp"			/*	reverse_iterator */
 # include "../utils/algorithm.hpp"						/*	equal & lex_compare */
@@ -52,7 +53,7 @@ namespace	ft
 		public:
 			/*	Canonical form */
 			explicit	vector(const allocator_type &alloc = allocator_type());		//empty
-			explicit	vector(	size_type size,										//fill
+			explicit	vector(	size_type n,										//fill
 								const_reference val = value_type(),
 								const	allocator_type &alloc = allocator_type());
 			template <typename InputIterator>
@@ -104,8 +105,8 @@ namespace	ft
 			iterator					erase(iterator first, iterator last);
 			void						push_back(const value_type &val);
 			void						pop_back();
-			iterator 					insert( const_iterator pos, const value_type& value );
-			iterator 					insert( const_iterator pos, size_type count, const T& value );
+			iterator					insert(iterator pos, const T &value);
+			void						insert(iterator pos,size_type count, const T &value);
 			void						assign(size_type n, const value_type &val);
 			template <typename InputIt>
 			void	insert(	iterator pos, InputIt first, InputIt last,
