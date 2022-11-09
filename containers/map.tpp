@@ -6,7 +6,17 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 20:13:27 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 20:13:28 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/08 13:48:08 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MAP_TPP
+# define MAP_TPP
+
+namespace	ft
+{
+	
+	
+}	//end of "namespace	ft"
+
+#endif

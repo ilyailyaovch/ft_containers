@@ -6,7 +6,17 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:54:49 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/06 22:54:50 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/08 13:47:34 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RB_TREE_TPP
+#define RB_TREE_TPP
+
+namespace ft
+{
+
+
+} // end of "namespace	ft"
+
+#endif

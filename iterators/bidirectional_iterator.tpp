@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 21:09:47 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/07 19:12:32 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/08 12:48:09 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@ namespace	ft
 	/*=================================*/
 	/*	Canonical form */
 
-	template <typename T>
-	bidirectional_iterator<T>::bidirectional_iterator() :
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>::bidirectional_iterator() :
 	_null_node(), _elem()
 	{
 	}
 
-	template <typename T>
-	bidirectional_iterator<T>::bidirectional_iterator(pointer null_node, pointer ptr) :
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>::bidirectional_iterator(pointer null_node, pointer ptr) :
 	_null_node(null_node), _elem(ptr)
 	{
 	}
 
-	template <typename T>
-	bidirectional_iterator<T>::bidirectional_iterator(const bidirectional_iterator &other)
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>::bidirectional_iterator(const bidirectional_iterator &other)
 	{
 		this->_null_node = other._null_node;
 		this->_elem = other._elem;
 	}
 
-	template <typename T>
-	bidirectional_iterator<T>&
-	bidirectional_iterator<T>::operator=(const bidirectional_iterator<T> &other)
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>&
+	bidirectional_iterator<T, pair_type>::operator=(const bidirectional_iterator<T, pair_type> &other)
 	{
 		if (this != &other)
 		{
@@ -49,17 +49,17 @@ namespace	ft
 		return (*this);
 	}
 
-	template <typename T>
-	bidirectional_iterator<T>::~bidirectional_iterator()
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>::~bidirectional_iterator()
 	{
 	}
 
 	/*=================================*/
 	/*	Operators */
 
-	template <typename T>
-	bidirectional_iterator<T>&
-	bidirectional_iterator<T>::operator++()
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>&
+	bidirectional_iterator<T, pair_type>::operator++()
 	{
 		if (this->_elem->right != this->_null_node)
 		{
@@ -81,7 +81,91 @@ namespace	ft
 		return (*this);
 	}
 
-	//now here
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>
+	bidirectional_iterator<T, pair_type>::operator++(int)
+	{
+		bidirectional_iterator<T, pair_type>	tmp;
+
+		tmp = *this;
+
+		this->operator++();
+		return (tmp);
+	}
+
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>&
+	bidirectional_iterator<T, pair_type>::operator--()
+	{
+		if (this->_elem == this->_null_node)
+		{
+			this->_elem = this->_null_node->parent;
+			while (this->_elem->right != this->_null_node)
+				this->_elem = this->_elem->right;
+		}
+		else if (this->_elem->left != this->_null_node)
+		{
+			this->_elem = this->_elem->left;
+			while (this->_elem->right != this->_null_node)
+				this->_elem = this->_elem->right;
+		}
+		else
+		{
+			if (this->_elem == this->_elem->parent->right)
+				this->_elem = this->_elem->parent;
+			else
+			{
+				while (this->_elem == this->_elem->parent->left)
+					this->_elem = this->_elem->parent;
+				this->_elem = this->_elem->parent;
+			}
+		}
+		return (*this);
+	}
+
+	template <typename T, typename pair_type>
+	bidirectional_iterator<T, pair_type>
+	bidirectional_iterator<T, pair_type>::operator--(int)
+	{
+		bidirectional_iterator<T, pair_type>	tmp;
+
+		tmp = *this;
+		this->operator--();
+		return (tmp);
+	}
+
+	template <typename T, typename pair_type>
+	pair_type	&bidirectional_iterator<T, pair_type>::operator*() const
+	{
+		return (this->_elem->data);
+	}
+
+	template <typename T, typename pair_type>
+	pair_type	*bidirectional_iterator<T, pair_type>::operator->() const
+	{
+		return (&(this->_elem->data));
+	}
+
+	template <typename T, typename pair_type>
+	typename bidirectional_iterator<T, pair_type>::pointer
+	bidirectional_iterator<T, pair_type>::get_node() const
+	{
+		return (this->_elem);
+	}
+
+	template <typename T, typename pair_type>
+	bool	bidirectional_iterator<T, pair_type>::operator==
+	(const bidirectional_iterator &other) const
+	{
+		return (this->_elem == other._elem);
+	}
+
+	template <typename T, typename pair_type>
+	bool	bidirectional_iterator<T, pair_type>::operator!=
+	(const bidirectional_iterator &other) const
+	{
+		return (this->_elem != other._elem);
+	}
 
 }	//end of "namespace	ft"
 
