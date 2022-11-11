@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:54:49 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/11 15:44:39 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 21:00:20 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,6 @@ namespace ft
 	rb_tree<T, Compare, Alloc>::max_size() const
 	{
 		return (this->_alloc_node.max_size());
-		// return ();
 	}
 	
 	/*=============================*/

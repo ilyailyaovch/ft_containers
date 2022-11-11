@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 13:58:23 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/07 19:01:10 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/12 01:36:18 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ namespace	ft
 			size_type 					size() const;
 			size_type 					max_size() const;
 			size_type					capacity() const;
-			void 						reserve(size_type new_cap);
+			void 						reserve(size_type );
 			void						resize(size_type n, value_type val = value_type());
 
 		public:
-			/* Member functions (Element access) */
+			/*	Member functions (Element access) */
 			reference					operator[](size_type n);
 			const_reference				operator[](size_type n) const;
 			reference					at(size_type pos);
@@ -100,13 +100,13 @@ namespace	ft
 		public:
 			/*	Member functions (Modifiers) */
 			void						clear();
-			void						swap(vector &other);
-			iterator					erase(iterator pos);
+			void						swap(vector& );
+			iterator					erase(iterator );
 			iterator					erase(iterator first, iterator last);
-			void						push_back(const value_type &val);
-			void						pop_back();
-			iterator					insert(iterator pos, const T &value);
-			void						insert(iterator pos,size_type count, const T &value);
+			void						push_back(const value_type& );
+			void						pop_back(void);
+			iterator					insert(iterator , const value_type& );
+			void    					insert(iterator , size_type , const value_type& );
 			void						assign(size_type n, const value_type &val);
 			template <typename InputIt>
 			void	insert(	iterator pos, InputIt first, InputIt last,

@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 20:45:22 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/11 10:53:31 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 21:11:25 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	example1()
 	std::cout << COLOR_YELLOW_B;
 	std::cout << "std::pair -> first: " << pair1.first;
 	std::cout << ", second: " << pair1.second;
-	pair1 = std::make_pair(1, "Nenie_Iri");
+	pair1 = std::make_pair(1, "Ilya");
 	std::cout << ", first: " << pair1.first;
 	std::cout << ", second: " << pair1.second;
 	std::pair<int, std::string>	pair2(2, "HI");
@@ -83,7 +83,7 @@ static void	example1()
 	std::cout << COLOR_GREEN_B;
 	std::cout << "ft::pair  -> first: " << ft_pair1.first;
 	std::cout << ", second: " << ft_pair1.second;
-	ft_pair1 = ft::make_pair(1, "Nenie_Iri");
+	ft_pair1 = ft::make_pair(1, "Ilya");
 	std::cout << ", first: " << ft_pair1.first;
 	std::cout << ", second: " << ft_pair1.second;
 	ft::pair<int, std::string>	ft_pair2(2, "HI");
@@ -133,7 +133,7 @@ static void	example2()
 	std::cout << "std::pair -> ";
 	std::cout << "size: " << A.size();
 	std::cout << ", empty: " << A.empty();
-	std::cout << ", size: " << A.max_size();
+	std::cout << ", max_size: " << A.max_size();
 	A.insert(pair1);
 	std::cout << ", size: " << A.size();
 	A.insert(std::make_pair(-1, "B"));
@@ -142,7 +142,7 @@ static void	example2()
 	std::cout << ", pair -> first: " << pair1.first;
 	std::cout << ", second: " << pair1.second;
 	std::cout << ", size: " << A.size();
-	std::cout << ", size: " << A.max_size();
+	std::cout << ", max_size: " << A.max_size();
 	std::cout << ", empty: " << A.empty();
 	it1 = A.begin();
 	std::cout << ", it: " << (*it1).first;
@@ -164,7 +164,7 @@ static void	example2()
 	std::cout << "ft::pair  -> ";
 	std::cout << "size: " << ft_A.size();
 	std::cout << ", empty: " << ft_A.empty();
-	std::cout << ", size: " << ft_A.max_size();
+	std::cout << ", max_size: " << ft_A.max_size();
 	ft_A.insert(ft_pair1);
 	std::cout << ", size: " << ft_A.size();
 	ft_A.insert(ft::make_pair(-1, "B"));
@@ -173,7 +173,7 @@ static void	example2()
 	std::cout << ", pair -> first: " << ft_pair1.first;
 	std::cout << ", second: " << ft_pair1.second;
 	std::cout << ", size: " << ft_A.size();
-	std::cout << ", size: " << ft_A.max_size();
+	std::cout << ", max_size: " << ft_A.max_size();
 	std::cout << ", empty: " << ft_A.empty();
 	ft_it1 = ft_A.begin();
 	std::cout << ", it: " << (*ft_it1).first;
