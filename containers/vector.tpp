@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/12 01:32:30 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/12 02:15:18 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,13 +210,14 @@ namespace ft
 	template <typename T, typename Allocator>
 	void	vector<T, Allocator>::reserve(size_type new_cap)
 	{
-		size_type i;
-		
+		pointer		tmp;
+		size_type	i;
+
 		if (this->_size ==  this->max_size())
 			throw std::length_error("vector::out of max_size");
 		else if (new_cap > this->_capacity)
 		{
-			pointer tmp = this->_alloc.allocate(new_cap);
+			tmp = this->_alloc.allocate(new_cap);
 			try
 			{
 				for (i = 0; i < this->_size; ++i)
@@ -248,7 +249,7 @@ namespace ft
 		}
 		else
 		{
-			if (n > _capacity)
+			if (n > _capacity) 
 			{
 				size_type tmpCap = (_capacity * 2 > n) ? (_capacity * 2) : (n);
 				reserve(tmpCap);
@@ -425,113 +426,56 @@ namespace ft
 		this->_size -= 1;
 	}
 
-	// insert(value)
 	template <typename T, typename Allocator>
 	typename vector<T, Allocator>::iterator
 	vector<T, Allocator>::insert(iterator pos, const T &value)
 	{
-		size_type	insertStart;
+		size_type	start;
 
-		insertStart = static_cast<size_type>(pos - this->begin());
+		start = pos - this->begin();
 		this->insert(pos, 1, value);
-		return (this->begin() + insertStart);
+		return (this->begin() + start);
 	}
 
-	// insert(fill)
+	// insert(value)
 	template <typename T, typename Allocator>
-	void    vector<T, Allocator>::insert(iterator pos, size_type count, const value_type& value)
+	void	vector<T, Allocator>::insert(iterator pos, size_type n, const T &val)
 	{
-		// difference_type	dist = position - this->begin();
-		// if (this->_size == 0)
-		// 	reserve(n);
-		// else if (this->_size + n > this->_capacity)
-		// {
-		// 	if (this->_size < n)
-		// 		reserve(this->_size + n);
-		// 	else
-		// 		reserve(this->_capacity * 2);
-		// }
-		
-		// for (difference_type i = this->_size - 1; i >= dist; i--) 
-		// 	_alloc.construct(&_array[i + n], _array[i]);
-		// for (size_type i = 0; i < n; i++)
-		// {
-		// 	_alloc.construct(&_array[dist], val);
-		// 	dist++;
-		// }
-		// this->_size += n;
+		difference_type	dist = pos - this->begin();
+		if (this->_size == 0)
+			reserve(n);
+		else if (this->_size + n > this->_capacity)
+		{
+			if (this->_size < n)
+				reserve(this->_size + n);
+			else
+				reserve(this->_capacity * 2);
+		}
+
+		for (difference_type i = this->_size - 1; i >= dist; i--) 
+			_alloc.construct(&_array[i + n], _array[i]);
+		for (size_type i = 0; i < n; i++)
+		{
+			_alloc.construct(&_array[dist], val);
+			dist++;
+		}
+		this->_size += n;
+	}
+	
+	// // insert(range || iterators)
+	template <typename T, typename Allocator>
+	template <typename InputIt>
+	void	vector<T, Allocator>::insert(iterator pos, InputIt first, InputIt last,
+	typename enable_if<!is_integral<InputIt>::value, bool>::type)
+	{
 		pointer		tmp;
 		size_type	start;
 		size_type	i;
 		size_type	j;
+		size_type	count;
 
+		count = static_cast<size_type>(ft::distance(first, last));
 		start = static_cast<size_type>(pos - this->begin());
-		i = 0;
-		j = 0;
-		if (count == 0)
-			return ;
-		else if (pos < this->begin() && pos > this->end())
-			throw std::logic_error("vector:insert error");
-		else if (this->max_size() < this->_size + count)
-			throw std::length_error("vector:insert error");
-		if (this->_size + count > this->_capacity)
-		{
-			size_type	tmp_cap = (_capacity * 2 >= this->_size + count) ? \
-								 (this->_capacity * 2) : (this->_size + count);
-			tmp = this->_alloc.allocate(tmp_cap);
-			try
-			{
-				for (; i < start; ++i)
-					this->_alloc.construct(tmp + i, this->_array[i]);
-				for (; j < count; ++j)
-					this->_alloc.construct(tmp + i + j, value);
-				for (; i + j < (this->_size + count); ++i)
-					this->_alloc.construct(tmp + i + j, this->_array[i]);
-				for (int t = 0; i < this->_size; ++t)
-					this->_alloc.destroy(this->_alloc.address(this->_array[t]));
-			}
-			catch (...)
-			{
-				for (size_type t = 0; t < i + j; t++)
-                	this->_alloc.destroy(tmp + t);
-				this->_alloc.deallocate(tmp, this->_size + count);
-				throw ;
-			}
-			this->_alloc.deallocate(this->_array, this->_capacity);
-			this->_capacity = tmp_cap;
-			this->_array = tmp;
-		}
-		else
-		{
-			for (size_type t = this->_size + count - 1; t >= start; --t)
-			{
-				if (t >= start && t < start + count)
-					this->_alloc.construct(this->_array + t, value);
-				else if (t >= this->_size)
-					this->_alloc.construct(this->_array + t, this->_array[t - count]);
-				else if (t <= this->_size && t >= start + count)
-				{
-					this->_alloc.destroy(this->_array + t);
-					this->_alloc.construct(this->_array + t, this->_array[t - count]);
-				}
-				if (t == 0)
-					break ;
-			}
-		}
-		this->_size = this->_size + count;
-	}
-	
-	// insert(range || iterators)
-	template <typename T, typename Allocator>
-	template <typename InputIt>
-	void    vector<T, Allocator>::insert(iterator pos, InputIt first, InputIt last,
-		typename enable_if<!is_integral<InputIt>::value, bool>::type)
-	{
-		pointer		tmp;
-		size_type	i, j;
-
-		size_type count = static_cast<size_type>(last - first);
-		size_type start = static_cast<size_type>(pos - this->begin());
 		i = 0;
 		j = 0;
 		if (count == 0)
