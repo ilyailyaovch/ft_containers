@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 13:05:08 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/07 18:10:06 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 14:12:48 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 namespace ft
 {
-	/*=================================*/
+	/*====================================================*/
 	/*	Canonical form */
+	/*====================================================*/
 
 	template <typename T, typename Allocator>
 	vector<T, Allocator>::vector(const allocator_type &alloc):
@@ -115,8 +116,9 @@ namespace ft
 			_alloc.deallocate(_array, _capacity);
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/*	Member functions Iterators */
+	/*====================================================*/
 
 	template <typename T, typename Allocator>
 	typename vector<T, Allocator>::iterator
@@ -174,8 +176,9 @@ namespace ft
 		return (const_reverse_iterator(this->begin()));
 	}
 	
-	/*=================================*/
+	/*====================================================*/
 	/* Member functions Capacity */
+	/*====================================================*/
 
 	template <typename T, typename Allocator>
 	bool	vector<T, Allocator>::empty() const
@@ -247,8 +250,9 @@ namespace ft
 			this->insert(this->end(), n - this->_size, val);
 	}
 	
-	/*=================================*/
+	/*====================================================*/
 	/* Member functions Element access */
+	/*====================================================*/
 
 	template <typename T, typename Allocator>
 	typename vector<T, Allocator>::reference
@@ -324,8 +328,9 @@ namespace ft
 		return (this->_array);
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/*	Member functions Modifiers */
+	/*====================================================*/
 	
 	template <typename T, typename Allocator>
 	void	vector<T, Allocator>::clear()
@@ -574,8 +579,9 @@ namespace ft
 		this->insert(this->begin(), first, last);
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/*	Member functions (Allocator) */
+	/*====================================================*/
 
 	template <typename T, typename Allocator>
 	typename vector<T, Allocator>::allocator_type
@@ -584,8 +590,9 @@ namespace ft
 		return (this->_alloc);
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/*	Non-member functions (operators) */
+	/*====================================================*/
 
 	template <typename T, typename Allocator>
 	void	swap(	vector<T, Allocator> &lhs,

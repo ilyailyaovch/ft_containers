@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:23:35 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/06 22:34:48 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 12:12:36 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,21 @@
 namespace	ft
 {
 	template <typename T>
-	rb_node<T>::rb_node()
+	rb_node<T>::rb_node() :
+		data()
 	{
-		this->data = NULL;
 		this->left = NULL;
 		this->right = NULL;
-		this->parent = NULL;
+		this->p = NULL;
 		this->color = ft::RED;
 	}
 
 	template <typename T>
-	rb_node<T>::rb_node(const T &elem)
+	rb_node<T>::rb_node(const T &elem) : data(elem)
 	{
-		this->data = elem;
 		this->left = NULL;
 		this->right = NULL;
-		this->parent = NULL;
+		this->p = NULL;
 		this->color = ft::RED;
 	}
 
@@ -41,7 +40,7 @@ namespace	ft
 		this->data = other.data;
 		this->left = other.left;
 		this->right = other.right;
-		this->parent = other.parent;
+		this->p = other.p;
 		this->color = other.color;
 	}
 
@@ -53,7 +52,7 @@ namespace	ft
 			this->data = other.data;
 			this->left = other.left;
 			this->right = other.right;
-			this->parent = other.parent;
+			this->p = other.p;
 			this->color = other.color;
 		}
 		return (*this);
@@ -63,7 +62,7 @@ namespace	ft
 	rb_node<T>::~rb_node()
 	{
 	}
-	
+
 }	//end of "namespace	ft"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 18:38:43 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 19:24:59 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 14:12:13 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 namespace ft
 {
-	/*=================================*/
+	/*====================================================*/
 	/*	Canonical form */
+	/*====================================================*/
 
 	template <typename T, typename Container>
 	stack<T, Container>::stack(const container_type &cont)
@@ -38,8 +39,9 @@ namespace ft
 		this->_cont.clear();
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/*	Member functions */
+	/*====================================================*/
 
 	template <typename T, typename Container>
 	typename stack<T, Container>::reference
@@ -80,8 +82,9 @@ namespace ft
 		this->_cont.pop_back();
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/*	Non-member functions */
+	/*====================================================*/
 
 	template <typename _T, typename _Cont>
 	bool	operator==(const stack<_T, _Cont> &lhs, const stack<_T, _Cont> &rhs)

@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 16:18:08 by vismaily          #+#    #+#             */
-/*   Updated: 2022/11/04 20:12:13 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 14:20:32 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ namespace	ft
 	template <typename InputIt1, typename InputIt2>
 	bool	lexicographical_compare(InputIt1 first1, InputIt1 last1,
 									InputIt2 first2, InputIt2 last2);
-}
+
+}	//end of "namespace	ft"
 
 # include "algorithm.tpp"
 

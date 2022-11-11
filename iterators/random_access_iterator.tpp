@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:54 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/07 19:00:22 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 14:14:07 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 namespace ft
 {
-	/*=================================*/
+	/*====================================================*/
 	/*	Canonical form */
+	/*====================================================*/
 
 	template <typename T>
 	random_access_iterator<T>::random_access_iterator():
@@ -54,8 +55,9 @@ namespace ft
 	{
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/*	Member functions */
+	/*====================================================*/
 	
 	template <typename T>
 	bool	random_access_iterator<T>::operator==(const random_access_iterator &other) const
@@ -190,8 +192,9 @@ namespace ft
 		return (this->_elem);
 	}
 
-	/*=================================*/
+	/*====================================================*/
 	/* For Non-member functions  */
+	/*====================================================*/
 
 	template <typename T_L, typename T_R>
 	typename random_access_iterator<T_L>::difference_type

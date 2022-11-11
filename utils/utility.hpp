@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:26 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 15:01:26 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 14:18:05 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 
 namespace	ft
 {
-	/*	Pair */
+	/**		Pair
+	 * std::pair is a class template 
+	 * that provides a way to store two heterogeneous objects as a single unit.
+	 * A pair is a specific case of a std::tuple with two elements. */
 	
 	template <typename T1, typename T2>
 	struct	pair

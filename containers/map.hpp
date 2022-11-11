@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:13:07 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/08 15:29:40 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 15:10:40 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <memory>					/*	std::allocator */
 # include <stdexcept>				/* 	try...catch */
-// # include <functional>
 # include "../utils/utility.hpp"	/*	ft::pair */
 # include "../utils/functional.hpp"	/*	ft::less */
 # include "../utils/algorithm.hpp"	/*	equal & lex_compare */
@@ -54,26 +53,26 @@ namespace	ft
 			class value_compare
 			{
 				friend class map<key_type, value_type, key_compare, allocator_type>;
-				protected:
+				public:
 					Compare comp;
 					value_compare(Compare c){this->comp = c;}
 				public:
 					bool operator()(const value_type & x, const value_type & y) const 
 					{
 						return comp(x.first, y.first);
-					} 
+					}
 			};
-		//
+
 		public:
 			/*	Member types (Iterators) */
-			typedef rb_tree<value_type, value_compare, allocator_type>	rb_tree;
-			typedef typename rb_tree::iterator					iterator;
-			typedef typename rb_tree::const_iterator			const_iterator;
-			typedef typename rb_tree::reverse_iterator			reverse_iterator;
-			typedef typename rb_tree::const_reverse_iterator	const_reverse_iterator;
+			typedef rb_tree<value_type, key_compare, allocator_type> 	rb_tree;
+			typedef typename rb_tree::iterator							iterator;
+			typedef typename rb_tree::const_iterator					const_iterator;
+			typedef typename rb_tree::reverse_iterator					reverse_iterator;
+			typedef typename rb_tree::const_reverse_iterator			const_reverse_iterator;
 		
 		public:
-			/* Constructors and destructors */
+			/*	Constructors and destructors */
 			explicit	map(const key_compare &comp = key_compare(),
 							const allocator_type &alloc = allocator_type());
 			template <typename InputIterator>
@@ -84,8 +83,8 @@ namespace	ft
 			map	&operator=(const map &other);
 			~map();
 
-		/* Iterators */
 		public:
+			/*	Iterators */
 			iterator						begin();
 			const_iterator					begin() const;
 			iterator						end();
@@ -95,20 +94,20 @@ namespace	ft
 			reverse_iterator				rend();
 			const_reverse_iterator			rend() const;
 
-		/* Capacity */
 		public:
+			/* Capacity */
 			bool							empty() const;
 			size_type						size() const;
 			size_type						max_size() const;
 
-		/* Element access */
 		public:
+			/* Element access */
 			mapped_type						&operator[](const key_type &key);
 			mapped_type						&at(const key_type &key);
 			const mapped_type				&at(const key_type &key) const;
 
-		/* Modifires */
 		public:
+			/* Modifires */
 			ft::pair<iterator, bool>		insert(const value_type &val);
 			iterator						insert(iterator it, const value_type &val);
 			template <class InputIt> void	insert(InputIt first, InputIt last);
@@ -118,13 +117,13 @@ namespace	ft
 			void							swap(map &other);
 			void							clear();
 
-		/* Observers */
 		public:
+			/* Observers */
 			key_compare						key_comp() const;
 			value_compare					value_comp() const;
 
-		/* Operations */
 		public:
+			/* Operations */
 			iterator						find(const key_type &key);
 			const_iterator					find(const key_type &key) const;
 			size_type						count(const key_type &key) const;
@@ -133,18 +132,48 @@ namespace	ft
 			iterator						upper_bound(const key_type &key);
 			const_iterator					upper_bound(const key_type &key) const;
 			ft::pair<iterator, iterator>	equal_range(const Key &key);
-			ft::pair<const_iterator, \
+			ft::pair<	const_iterator, 
 						const_iterator>		equal_range(const Key &key) const;
 
-		/* Allocator */
 		public:
-			allocator_type					get_allocator() const;
-		/////
+			/* Allocator */
+			allocator_type	get_allocator() const;
+
 		private:
 			/* Member data */
-			rb_tree	_tree;
-			
+			rb_tree			_tree;
+
 	};	//end of "class map"
+
+	/*	Non-member functions */
+
+	template <typename Key, typename T, typename Compare, typename Alloc>
+	void	swap(	ft::map<Key, T, Compare, Alloc> &lhs,
+					ft::map<Key, T, Compare, Alloc> &rhs);
+
+	template <typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator==(	const ft::map<Key, T, Compare, Alloc> &lhs,
+						const ft::map<Key, T, Compare, Alloc> &rhs);
+
+	template <typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator!=(	const ft::map<Key, T, Compare, Alloc> &lhs,
+						const ft::map<Key, T, Compare, Alloc> &rhs);
+
+	template <typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator<(	const ft::map<Key, T, Compare, Alloc> &lhs,
+						const ft::map<Key, T, Compare, Alloc> &rhs);
+
+	template <typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator<=(	const ft::map<Key, T, Compare, Alloc> &lhs,
+						const ft::map<Key, T, Compare, Alloc> &rhs);
+
+	template <typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator>(	const ft::map<Key, T, Compare, Alloc> &lhs,
+						const ft::map<Key, T, Compare, Alloc> &rhs);
+
+	template <typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator>=(	const ft::map<Key, T, Compare, Alloc> &lhs,
+						const ft::map<Key, T, Compare, Alloc> &rhs);
 
 }	//end of "namespace	ft"
 

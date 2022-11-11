@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 17:14:38 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/04 19:01:18 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 10:14:38 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 
 void	vectorTest();
 void	stackTest();
+void	mapTest();
 
 int main(void)
 {
 	vectorTest();
 	stackTest();
+	mapTest();
 	return (EXIT_SUCCESS);
 }

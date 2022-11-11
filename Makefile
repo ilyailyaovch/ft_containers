@@ -6,16 +6,17 @@
 #    By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/08 22:54:17 by ilya              #+#    #+#              #
-#    Updated: 2022/11/06 20:46:01 by ilya             ###   ########.fr        #
+#    Updated: 2022/11/11 14:40:31 by ilya             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	ft_containers
 
-SRC			=	mainTest.cpp 	\
-				vectorTest.cpp	\
-				stackTest.cpp 	\
-				mapTest.cpp
+SRC			=	main.cpp
+				# mainTest.cpp 	\
+				# vectorTest.cpp	\
+				# stackTest.cpp 	\
+				# mapTest.cpp
 
 INC			= 
 

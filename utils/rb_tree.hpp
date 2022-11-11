@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 21:05:50 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/09 11:34:28 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 20:10:32 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,33 @@
 # include <iostream>
 # include "../iterators/bidirectional_iterator.hpp"
 # include "../iterators/reverse_iterator.hpp"
-# include "../utils/functional.hpp"	/*	NOT implemented */
+# include "../utils/functional.hpp"	/*	ft:less */
+# include "../utils/utility.hpp"	/*	ft:pair */
 # include "../utils/rb_node.hpp"	/*	ft::rb_node */
 
 namespace	ft
 {
-	template < typename T, typename Compare = std::less<T>, typename Alloc = std::allocator<T> >
+	template <typename T, typename Compare = ft::less<T>, typename Alloc = std::allocator<T> >
 	class	rb_tree
 	{
 		public:
-			/* Member types */
+			/*	Member types */
+			typedef select_first<T>									Key;
 			typedef T												value_type;
 			typedef Compare											key_compare;
 			typedef Alloc											allocator_type;
+			typedef rb_node<value_type>								node;
 			typedef rb_node<value_type>								*node_ptr;
 			typedef size_t											size_type;
-			typedef bidirectional_iterator<node_ptr, T>				iterator;
-			typedef bidirectional_iterator<const node_ptr, const T>	const_iterator;
+			typedef bidirectional_iterator<node, T>					iterator;
+			typedef bidirectional_iterator<const node, const T>		const_iterator;
 			typedef reverse_iterator<const_iterator>				const_reverse_iterator;
 			typedef reverse_iterator<iterator>						reverse_iterator;
-			typedef typename allocator_type::template rebind<rb_node<value_type> >::other
+			typedef typename allocator_type::template rebind< node >::other
 																	allocator_node_type;
 
 		public:
-			/* Constructors and destructors */
+			/*	Constructors and destructors */
 			rb_tree(const key_compare &comp = key_compare(),
 					const allocator_type &alloc = allocator_type());
 			rb_tree(const node_ptr head,
@@ -53,7 +56,7 @@ namespace	ft
 			~rb_tree();
 
 		public:
-			/* Tree functional */
+			/*	Tree functional */
 			node_ptr			create_node(value_type data);
 			node_ptr			get_head() const;
 			node_ptr			get_null() const;
@@ -69,24 +72,24 @@ namespace	ft
 			node_ptr			predecessor() const;
 
 		public:
-			/* Capacity */
+			/*	Capacity */
 			bool				empty() const;
 			size_type			size() const;
 			size_type			max_size() const;
 
 		public:
-			/* Operations */
+			/*	Operations */
 			node_ptr			search(node_ptr head, const value_type &data) const;
 			node_ptr			search(const value_type &data) const;
 
-			/* Count */
+			/*	Count */
 			void				count_in_level(node_ptr head,
 								const value_type &data, int level,
 								size_type &count) const;
 			size_type			count(node_ptr head, const value_type &data) const;
 			size_type			count(const value_type &data) const;
 
-			/* Bounds */
+			/*	Bounds */
 			iterator			lower_bound(const value_type &data);
 			const_iterator		lower_bound(const value_type &data) const;
 			iterator			upper_bound(const value_type &data);
@@ -96,7 +99,7 @@ namespace	ft
 			ft::pair<const_iterator, const_iterator>	equal_range(const value_type &data) const;
 
 		public:
-			/* Tree walk */
+			/*	Tree walk */
 			void				preorder_tree_walk(node_ptr head) const;
 			void				preorder_tree_walk() const;
 			void				inorder_tree_walk(node_ptr head) const;
@@ -111,7 +114,7 @@ namespace	ft
 			void				print_tree() const;
 
 		public:
-			/* Modifiers (Insert, erase, swap) */
+			/*	Modifiers (Insert, erase, swap) */
 			ft::pair<iterator, bool>	insert(node_ptr head, node_ptr new_node);
 			ft::pair<iterator, bool>	insert(node_ptr new_node);
 			iterator					insert(iterator hint, const value_type &value);
@@ -126,7 +129,7 @@ namespace	ft
 			void						swap(rb_tree &other);
 
 		public:
-			/* Iterators */
+			/*	Iterators */
 			iterator				begin();
 			const_iterator			begin() const;
 			iterator				end();
@@ -137,11 +140,11 @@ namespace	ft
 			const_reverse_iterator	rend() const;
 
 		public:
-			/* Allocator */
+			/*	Allocator */
 			allocator_type			get_allocator() const;
 
 		private:
-			/* Helper methods */
+			/*	Helper methods */
 			void				transplant(node_ptr u, node_ptr v);
 			void				deep_copy(node_ptr other_node, node_ptr other_null);
 			bool				comp_data(value_type v1, value_type v2) const;
@@ -149,7 +152,7 @@ namespace	ft
 			void				rotate_right(node_ptr node);
 
 		private:
-			/* Member data */
+			/*	Member data */
 			node_ptr			_head;
 			node_ptr			_null_node;
 			allocator_type		_alloc;
@@ -160,6 +163,7 @@ namespace	ft
 	};	//end of "class	rb_tree"
 
 }	//end of "namespace	ft"
+
 
 # include "rb_tree.tpp"
 

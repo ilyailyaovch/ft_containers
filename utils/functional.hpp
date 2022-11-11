@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:27:07 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/08 15:29:33 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/11 13:49:30 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,6 @@ namespace	ft
 		const typename Pair::first_type	&operator()(const Pair &x)
 		{
 			return (x.first);
-		}
-	};
-
-	template <typename T>
-	struct	select_self : unary_function<T, T>
-	{
-		T	&operator()(T &x)
-		{
-			return (x);
-		}
-
-		const T	&operator()(const T &x)
-		{
-			return (x);
 		}
 	};
 
