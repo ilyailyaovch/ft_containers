@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 20:45:22 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/12 02:29:24 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/12 13:29:57 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -633,6 +633,28 @@ static void	example9()
 	std::cout << '.' << RESET << std::endl << std::endl;
 }
 
+static int example10()
+{
+	// initialize container
+    std::map<int, int> mp1, mp2;
+    mp1.insert(std::make_pair(0, .2));
+    std::cout << MAGENTA << "Example 10" << RESET << std::endl;
+	std::cout << YELLOW;
+    std::cout << "The max size of mp1 is " << mp1.max_size();
+    std::cout << "\nThe max size of mp2 is " << mp2.max_size();
+	std::cout << RESET << std::endl;
+
+	std::cout << GREEN;
+	ft::map<int, int> 		ft_mp1, ft_mp2;
+	ft_mp1.insert(ft::make_pair(0, .2));
+	std::cout << GREEN;
+    std::cout << "The max size of mp1 is " << mp1.max_size();
+    std::cout << "\nThe max size of mp2 is " << mp2.max_size();
+	std::cout << RESET << std::endl;
+
+    return 0;
+}
+
 void	mapTest()
 {
 	std::cout << BOLDBLUE << "=================================" << RESET << std::endl;
@@ -648,4 +670,5 @@ void	mapTest()
 	example7();
 	example8();
 	example9();
+	example10();
 }

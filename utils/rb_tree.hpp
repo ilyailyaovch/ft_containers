@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 21:05:50 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/11 21:08:13 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/12 14:14:46 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ namespace	ft
 			typedef T												value_type;
 			typedef Compare											key_compare;
 			typedef Alloc											allocator_type;
+			typedef typename allocator_type::size_type				size_type;
 			typedef rb_node<value_type>								node;
 			typedef rb_node<value_type>								*node_ptr;
-			typedef size_t											size_type;
 			typedef bidirectional_iterator<node, T>					iterator;
 			typedef bidirectional_iterator<const node, const T>		const_iterator;
 			typedef reverse_iterator<const_iterator>				const_reverse_iterator;
