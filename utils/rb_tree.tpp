@@ -6,7 +6,7 @@
 /*   By: ilya <ilya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 22:54:49 by ilya              #+#    #+#             */
-/*   Updated: 2022/11/12 14:15:11 by ilya             ###   ########.fr       */
+/*   Updated: 2022/11/12 16:04:42 by ilya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,8 +288,8 @@ namespace ft
 	typename rb_tree<T, Compare, Alloc>::size_type
 	rb_tree<T, Compare, Alloc>::max_size() const
 	{
-		// return (this->_alloc_node.max_size());
-		return (std::numeric_limits<size_type>::max() / sizeof(node));
+		return (this->_alloc_node.max_size());
+		// return (std::numeric_limits<size_type>::max() / sizeof(node));
 	}
 	
 	/*=============================*/
